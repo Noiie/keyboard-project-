@@ -4,8 +4,8 @@ import TextArea from './components/TextArea'
 import Keyboard from './components/Keyboard'
 
 function App() {
-  const keyboardLayouts = [
-  [
+  const keyboardLayouts = {
+  english :[
     "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
     "a", "s", "d", "f", "g", "h", "j", "k", "l",
     "z", "x", "c", "v", "b", "n", "m",
@@ -13,7 +13,7 @@ function App() {
     "!", "@", "#", "$", "%", "^", "&", "*", "(", ")",
     "-", "=", "[", "]", "\\", ";", "'", ",", ".", "/"
   ],
-  [
+  hebrew: [
     "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י",
     "כ", "ל", "מ", "נ", "ס", "ע", "פ", "צ", "ק", "ר",
     "ש", "ת", "װ", "ױ", "׳", "״",
@@ -21,33 +21,60 @@ function App() {
     "!", "@", "#", "$", "%", "^", "&", "*", "(", ")",
     "-", "=", "[", "]", "{", "}", "\\", ";", "'", ":", ",", ".", "/"
   ] 
-];
+};
 
 
   const [text, setText] = useState("");
+  const [index, setIndex] = useState('english');
 
   function write(character) {
     setText(prev => prev + character);
   }
 
-  const [layout, setLayout] = useState(0);
-
-  function getLayout(){
-    if (layout === keyboardLayouts.length - 1) {
-        setLayout(0)
+  function swapLanguage(){
+    if (index === 'english') {
+      setIndex('hebrew')
     } else {
-        setLayout(prev => prev + 1)
+      setIndex('english')
     }
+  }
 
-    return layout
-}
+  function clear(){
+    setText('')
+  }
+
+  function textToUpperCase() {
+    setText(prev => prev.toUpperCase())
+  }
+
+  function textToLowerCase() {
+    setText(prev => prev.toLowerCase())
+  }
+
+
 
   return (
     <>
       <TextArea text={text} />
-      <Keyboard keyboardLayouts={keyboardLayouts} layoutNumber={getLayout} write={write} />
+      <Keyboard 
+        keyboardLayouts={keyboardLayouts} 
+        layoutIndex={index} 
+        swapLayoutIndex={swapLanguage} 
+        write={write}
+        clear={clear}
+        toUpperCase={textToUpperCase} />
     </>
   )
 }
 
 export default App
+
+//   function getLayout(){
+//     if (layout === keyboardLayouts.length - 1) {
+//         setLayout(0)
+//     } else {
+//         setLayout(prev => prev + 1)
+//     }
+
+//     return layout
+// }
