@@ -4,7 +4,7 @@ import TextArea from './components/TextArea'
 import Keyboard from './components/Keyboard'
 
 function App() {
-  const keyboard = ["a", "b"];
+  const keyboard = ["a", "b", "c", "d", "e", "f", "g"];
   console.log(keyboard)
   const [text, setText] = useState("");
 
