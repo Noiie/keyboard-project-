@@ -1,8 +1,12 @@
 export default function Keyboard(props) {
+
     return (
             <>
-                <button onClick={props.write('a')}>a</button>
-                <button onClick={props.write('b')}>b</button>
+            
+                {
+                    props.keyboardLayouts[props.layoutNumber()].map(key => <button onClick={() => props.write(key)}>{key}</button>)   
+                }
+                <button>🌐</button>
             </>
     )
 }

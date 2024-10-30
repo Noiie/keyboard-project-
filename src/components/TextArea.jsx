@@ -1,5 +1,5 @@
-export default function Textarea() {
+export default function Textarea(props) {
     return (
-        <p></p>
+        <p>{props.text}</p>
     )
 }
