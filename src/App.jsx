@@ -55,17 +55,9 @@ function App() {
     setText([])
   }
 
-  // function textToUpperCase() {
-  //   setText(prev => prev.toUpperCase())
-  // }
-
-  // function textToLowerCase() {
-  //   setText(prev => prev.toLowerCase())
-  // }
 
   function deleteLast() {
     setText(prev => [...prev.slice(0, -1)])
-    console.log(Array.isArray(text))
   }
 
   function space() {
@@ -76,6 +68,7 @@ function App() {
 
   return (
     <>
+    <h1>{'Our Amazing Keyboard'}</h1>
       <TextArea text={text} />
       <Keyboard 
         style={style}
@@ -85,8 +78,6 @@ function App() {
         swapLayoutIndex={swapLanguage} 
         write={write}
         clear={clear}
-        // toUpperCase={textToUpperCase}
-        // toLowerCase={textToLowerCase}
         deleteLast={deleteLast}
         space={space} />
     </>
@@ -94,13 +85,3 @@ function App() {
 }
 
 export default App
-
-//   function getLayout(){
-//     if (layout === keyboardLayouts.length - 1) {
-//         setLayout(0)
-//     } else {
-//         setLayout(prev => prev + 1)
-//     }
-
-//     return layout
-// }

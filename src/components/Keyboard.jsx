@@ -1,14 +1,7 @@
+/* eslint-disable react/prop-types */
 export default function Keyboard(props) {
-    function swapLanguage() {
-        if (props.index === "english") {
-            return false;
-        } else {
-            return true;
-        }
-    }
 
     function handleCapsLock(){
-        console.log(props.style.textTransform)
         if (props.style.textTransform === 'lowercase') {
             props.setStyle((prev) => ({ ...prev, textTransform: "uppercase" }))
         } else {
@@ -27,34 +20,33 @@ export default function Keyboard(props) {
                 );
             })}
 
-            <button onClick={props.swapLayoutIndex}>🌐</button>
-            <button onClick={props.clear}>Clear</button>
-            {/* <button onClick={props.toUpperCase}>
-                Upper case
-            </button> */}
-            <button onClick={props.space}>Space</button>
-            {/* <button onClick={props.toLowerCase}>
-                Lower case
-            </button> */}
+            <button style={{backgroundColor: "darkred"}} onClick={props.swapLayoutIndex}>🌐</button>
+            <button style={{backgroundColor: "lightgrey"}} onClick={props.clear}>Clear</button>
+            <button style={{backgroundColor: "lightgrey"}} onClick={props.space}>Space</button>
 
-            <button onClick={props.deleteLast}>Delete</button><br/><br/>
 
-            <button onClick={() => props.setStyle((prev) => ({ ...prev, color: "red" }))}>red</button>
-            <button onClick={() => props.setStyle((prev) => ({ ...prev, color: "blue" }))}>blue</button>
-            <button onClick={() => props.setStyle((prev) => ({ ...prev, color: "yellow" }))}>yellow</button>
-            <button onClick={() => props.setStyle((prev) => ({ ...prev, color: "peachpuff" }))}>peachpuff</button><br/>
+            <button style={{backgroundColor: "lightgrey"}} onClick={props.deleteLast}>Delete</button><br/><br/>
 
-            <button onClick={() => props.setStyle((prev) => ({ ...prev, fontSize: "20px" }))}>20px</button>
-            <button onClick={() => props.setStyle((prev) => ({ ...prev, fontSize: "30px" }))}>30px</button>
-            <button onClick={() => props.setStyle((prev) => ({ ...prev, fontSize: "40px" }))}>40px</button>
-            <button onClick={() => props.setStyle((prev) => ({ ...prev, fontSize: "50px" }))}>50px</button><br/>
+            <h3>{'colors'}</h3>
+            <button style={{color: 'red', backgroundColor: "grey"}} onClick={() => props.setStyle((prev) => ({ ...prev, color: "red" }))}>red</button>
+            <button style={{color: 'blue', backgroundColor: "grey"}} onClick={() => props.setStyle((prev) => ({ ...prev, color: "blue" }))}>blue</button>
+            <button style={{color: 'yellow', backgroundColor: "grey"}} onClick={() => props.setStyle((prev) => ({ ...prev, color: "yellow" }))}>yellow</button>
+            <button style={{color: 'peachpuff', backgroundColor: "grey"}} onClick={() => props.setStyle((prev) => ({ ...prev, color: "peachpuff" }))}>peachpuff</button><br/><br/>
 
-            <button onClick={() => props.setStyle((prev) => ({ ...prev, fontFamily: "Georgia" }))}>Georgia</button>
-            <button onClick={() => props.setStyle((prev) => ({ ...prev, fontFamily: "Courier New" }))}>Courier New </button>
-            <button onClick={() => props.setStyle((prev) => ({ ...prev, fontFamily: "Brush Script MT" }))}>Brush Script MT</button>
-            <button onClick={() => props.setStyle((prev) => ({ ...prev, fontFamily: "Garamond" }))}>Garamond</button>
+            <h3>{'size'}</h3>
+            <button style={{backgroundColor: "grey"}} onClick={() => props.setStyle((prev) => ({ ...prev, fontSize: "20px" }))}>20px</button>
+            <button style={{backgroundColor: "grey"}} onClick={() => props.setStyle((prev) => ({ ...prev, fontSize: "30px" }))}>30px</button>
+            <button style={{backgroundColor: "grey"}} onClick={() => props.setStyle((prev) => ({ ...prev, fontSize: "40px" }))}>40px</button>
+            <button style={{backgroundColor: "grey"}} onClick={() => props.setStyle((prev) => ({ ...prev, fontSize: "50px" }))}>50px</button><br/><br/>
 
-            <button onClick={handleCapsLock}>Caps Lock</button>
+            <h3>{'font'}</h3>
+            <button style={{backgroundColor: "lightgrey"}} onClick={() => props.setStyle((prev) => ({ ...prev, fontFamily: "Georgia" }))}>Georgia</button>
+            <button style={{backgroundColor: "lightgrey"}} onClick={() => props.setStyle((prev) => ({ ...prev, fontFamily: "Courier New" }))}>Courier New </button>
+            <button style={{backgroundColor: "lightgrey"}} onClick={() => props.setStyle((prev) => ({ ...prev, fontFamily: "Brush Script MT" }))}>Brush Script MT</button>
+            <button style={{ backgroundColor: "lightgrey"}} onClick={() => props.setStyle((prev) => ({ ...prev, fontFamily: "Garamond" }))}>Garamond</button><br/><br/>
+
+            <h3>{'caps'}</h3>
+            <button style={{backgroundColor: "grey"}} onClick={handleCapsLock}>Caps Lock</button>
         </>
     );
 }
