@@ -21,12 +21,26 @@ function App() {
   ] 
 };
 
+  class Character {
+    constructor(value, style) {
+      this.value = value;
+      this.style = style;
+    }
+  }
 
-  const [text, setText] = useState("");
+  const [text, setText] = useState([]);
   const [index, setIndex] = useState('english');
+  const [style, setStyle] = useState(
+    {
+      color: 'black',
+      fontSize: '20px',
+      fontFamily: 'arial',
+      textTransform: 'lowercase'
+    }
+  )
 
   function write(character) {
-    setText(prev => prev + character);
+    setText(prev => [...prev, new Character(character, style)]);
   }
 
   function swapLanguage(){
@@ -38,23 +52,24 @@ function App() {
   }
 
   function clear(){
-    setText('')
+    setText([])
   }
 
-  function textToUpperCase() {
-    setText(prev => prev.toUpperCase())
-  }
+  // function textToUpperCase() {
+  //   setText(prev => prev.toUpperCase())
+  // }
 
-  function textToLowerCase() {
-    setText(prev => prev.toLowerCase())
-  }
+  // function textToLowerCase() {
+  //   setText(prev => prev.toLowerCase())
+  // }
 
   function deleteLast() {
-    setText(prev => prev.slice(0, -1))
+    setText(prev => [...prev.slice(0, -1)])
+    console.log(Array.isArray(text))
   }
 
   function space() {
-     setText(prev => prev + ' ')     
+     setText(prev => [...prev, new Character(' ')])     
   }
 
 
@@ -63,13 +78,15 @@ function App() {
     <>
       <TextArea text={text} />
       <Keyboard 
+        style={style}
+        setStyle={setStyle}
         keyboardLayouts={keyboardLayouts} 
         layoutIndex={index} 
         swapLayoutIndex={swapLanguage} 
         write={write}
         clear={clear}
-        toUpperCase={textToUpperCase}
-        toLowerCase={textToLowerCase}
+        // toUpperCase={textToUpperCase}
+        // toLowerCase={textToLowerCase}
         deleteLast={deleteLast}
         space={space} />
     </>
