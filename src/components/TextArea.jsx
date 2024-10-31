@@ -1,5 +1,6 @@
+
 export default function Textarea(props) {
     return (
-        <p>{props.text}</p>
+        <p style={{ color: props.textColor, size: props.textSize } }>{props.text}</p>
     )
 }
