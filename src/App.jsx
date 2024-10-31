@@ -5,33 +5,42 @@ import Keyboard from './components/Keyboard'
 
 function App() {
   const keyboardLayouts = {
-    english: [
-      "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
-      "a", "s", "d", "f", "g", "h", "j", "k", "l",
-      "z", "x", "c", "v", "b", "n", "m",
-      "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-      "!", "@", "#", "$", "%", "^", "&", "*", "(", ")",
-      "-", "=", "[", "]", "\\", ";", "'", ",", ".", "/"
-    ],
-    hebrew: [
-      "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט", "י",
-      "כ", "ל", "מ", "נ", "ס", "ע", "פ", "צ", "ק", "ר",
-      "ש", "ת", "װ", "ױ", "׳", "״",
-      "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
-      "!", "@", "#", "$", "%", "^", "&", "*", "(", ")",
-      "-", "=", "[", "]", "{", "}", "\\", ";", "'", ":", ",", ".", "/"
-    ]
-  };
+  english :[
+    "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "=",
+    "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "{", "}", "[", "]",
+    "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+    "a", "s", "d", "f", "g", "h", "j", "k", "l", ":", ";", "'", "\\",
+    "z", "x", "c", "v", "b", "n", "m", ",", ".", "?", "/"
+  ],
+  hebrew: [
+    "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "-", "=",
+    "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "{", "}", "[", "]",
+    "ק", "ר", "א", "ט", "ו", "ן", "ם", "פ",
+    "ש", "ד", "ג", "כ", "ע", "י", "ח", "ל", "ך", "ף", ":", ";", "'", "\\",
+    "ז", "ס", "ב", "ה", "נ", "מ", "צ", "ת", "ץ", ",", ".", "?", "/"
+  ] 
+};
 
+  class Character {
+    constructor(value, style) {
+      this.value = value;
+      this.style = style;
+    }
+  }
 
-  const [text, setText] = useState("");
+  const [text, setText] = useState([]);
   const [index, setIndex] = useState('english');
-  const [textColor, setTextColor] = useState('black');
-  const [textSize, setTextSize] = useState('14px');
-
+  const [style, setStyle] = useState(
+    {
+      color: 'black',
+      fontSize: '20px',
+      fontFamily: 'arial',
+      textTransform: 'lowercase'
+    }
+  )
 
   function write(character) {
-    setText(prev => prev + character);
+    setText(prev => [...prev, new Character(character, style)]);
   }
 
   function swapLanguage() {
@@ -42,35 +51,44 @@ function App() {
     }
   }
 
-  function clear() {
-    setText('')
+  function clear(){
+    setText([])
   }
 
-  function textToUpperCase() {
-    setText(prev => prev.toUpperCase())
+  // function textToUpperCase() {
+  //   setText(prev => prev.toUpperCase())
+  // }
+
+  // function textToLowerCase() {
+  //   setText(prev => prev.toLowerCase())
+  // }
+
+  function deleteLast() {
+    setText(prev => [...prev.slice(0, -1)])
+    console.log(Array.isArray(text))
   }
 
-  function textToLowerCase() {
-    setText(prev => prev.toLowerCase())
+  function space() {
+     setText(prev => [...prev, new Character(' ')])     
   }
 
-  const changeColor = (color) => setTextColor(color);
-  const changeSize = (size) => setTextSize(size);
+
 
   return (
     <>
       <TextArea text={text} />
-      <Keyboard
-        keyboardLayouts={keyboardLayouts}
-        layoutIndex={index}
-        swapLayoutIndex={swapLanguage}
+      <Keyboard 
+        style={style}
+        setStyle={setStyle}
+        keyboardLayouts={keyboardLayouts} 
+        layoutIndex={index} 
+        swapLayoutIndex={swapLanguage} 
         write={write}
         clear={clear}
-        toUpperCase={textToUpperCase}
-        changeColor={changeColor}
-        changeSize={changeSize}
-      />
-
+        // toUpperCase={textToUpperCase}
+        // toLowerCase={textToLowerCase}
+        deleteLast={deleteLast}
+        space={space} />
     </>
   )
 }
